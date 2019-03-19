@@ -8,7 +8,7 @@ public class SwordSlash : MonoBehaviour
     private Rigidbody2D rb2d;
     private static SwordSlash _instance;
     public static SwordSlash Instance { get { return _instance; } }
-    public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
     public int speed = 20;
 
     public void Awake()
@@ -35,7 +35,8 @@ public class SwordSlash : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
-       // rb2d.velocity = playerMovement.velocity;
+        // rb2d.velocity = playerMovement.velocity;
+        //Debug.Log(playerMovement.velocity.x); 
         rb2d.velocity = transform.right * speed;
     }
 

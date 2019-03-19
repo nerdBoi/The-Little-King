@@ -34,9 +34,7 @@ public class PlayerWeapon : MonoBehaviour
     }
     void SwordSlash()
     {
-
             Instantiate(swordAttackPrefab, attackPoint.position, attackPoint.rotation);
-
     }
 
     IEnumerator AnimDelay()

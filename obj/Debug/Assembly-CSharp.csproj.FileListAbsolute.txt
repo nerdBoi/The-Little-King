@@ -282,3 +282,7 @@ E:\Kings_Cup\King's Cup\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 E:\Kings_Cup\King's Cup\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 E:\Kings_Cup\King's Cup\obj\Debug\Assembly-CSharp.dll
 E:\Kings_Cup\King's Cup\obj\Debug\Assembly-CSharp.pdb
+E:\Kings_Cup\King's Cup\Temp\bin\Debug\Cinemachine.dll
+E:\Kings_Cup\King's Cup\Temp\bin\Debug\com.unity.cinemachine.editor.dll
+E:\Kings_Cup\King's Cup\Temp\bin\Debug\Cinemachine.pdb
+E:\Kings_Cup\King's Cup\Temp\bin\Debug\com.unity.cinemachine.editor.pdb

@@ -53,11 +53,6 @@ public class PlayerMovement : MonoBehaviour
     void FlipCharacter()
     {
         isFacingRight = !isFacingRight;
-        // Vector3 currentScale = transform.localScale;
-        // currentScale.x *= -1;
-        // transform.localScale = currentScale;
-
-        //also can rotate with rotate method
         transform.Rotate(0f, 180, 0f);
 
     }
