@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeController : MonoBehaviour
+public class SnakeController : Enemy
 {
 
     public float moveSpeed = .25f;
@@ -10,17 +10,23 @@ public class SnakeController : MonoBehaviour
     public bool isFacingRight = true;
     public Transform turnAroundPoint;
     public LayerMask floors;
-    
+    public int health = 2;
+    public GameObject deathEffect;
+    private Renderer renderer;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0)
+        {
+            death();
+        }
     }
 
     private void FixedUpdate()
@@ -48,4 +54,26 @@ public class SnakeController : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
+
+    public override void TakeDamage(int damage)
+    {
+        health = health - damage;
+        renderer.material.color = new Color(255, 0, 0);
+        StartCoroutine(TakeDamageFlash());
+    }
+
+    void death()
+    {
+        Vector3 explosionPoint = transform.position;
+        explosionPoint.y += 2.5f;
+        Instantiate(deathEffect, explosionPoint, transform.rotation);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator TakeDamageFlash()
+    {
+        yield return new WaitForSeconds(.076f);
+        renderer.material.color = Color.white;
+    }
+
 }

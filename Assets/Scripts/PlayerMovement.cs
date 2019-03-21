@@ -18,18 +18,24 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 5f;
     public float lowJumpMultiplier = 8f;
     public Vector3 velocity;
+    private Vector3 respawnPoint;
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    public void setRespawnPoint(Vector3 position)
+    {
+        respawnPoint = position;
+    }
 
     private void Update()
     {
         //checking if player can jump by overlapping two bounding boxes
         isOnGround = Physics2D.OverlapArea(new Vector2(transform.position.x - .2f, transform.position.y - 1.3f), 
             new Vector2(transform.position.x + .2f, transform.position.y + 1.3f), floors);
+
 
         moveHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -88,6 +94,14 @@ public class PlayerMovement : MonoBehaviour
             rb2d.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
         velocity = rb2d.velocity;
+        //this works dont touch it
+  
+        if (transform.position.y < -100)
+        {
+            transform.position = respawnPoint;
+            rb2d.velocity = new Vector3 (0f, 0f, 0f);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

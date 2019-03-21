@@ -60,10 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\ExplosionScript.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerWeapon.cs" />
-    <Compile Include="Assets\SnakeController.cs" />
-    <Compile Include="Assets\SwordSlash.cs" />
+    <Compile Include="Assets\Scripts\RespawnPoint.cs" />
+    <Compile Include="Assets\Scripts\SnakeController.cs" />
+    <Compile Include="Assets\Scripts\SwordSlash.cs" />
     <Reference Include="Cinemachine">
       <HintPath>E:/Kings_Cup/King's Cup/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>

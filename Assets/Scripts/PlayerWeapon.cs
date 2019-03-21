@@ -10,11 +10,12 @@ public class PlayerWeapon : MonoBehaviour
     int currentWeapon = 0;
     bool canAttack = true;
     public PlayerMovement playerMovement;
-
+    
     void Start()
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
     }
+
 
     // Update is called once per frame
     void Update()
