@@ -12,21 +12,19 @@ public class SnakeController : Enemy
     public LayerMask floors;
     public int health = 2;
     public GameObject deathEffect;
-    private Renderer renderer;
+    public SpriteRenderer renderer;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            death();
-        }
+      
     }
 
     private void FixedUpdate()
@@ -60,6 +58,11 @@ public class SnakeController : Enemy
         health = health - damage;
         renderer.material.color = new Color(255, 0, 0);
         StartCoroutine(TakeDamageFlash());
+
+        if (health <= 0)
+        {
+            death();
+        }
     }
 
     void death()

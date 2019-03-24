@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Super_Background
+    uniqueID: 1506128159
+    locked: 0
   - name: Farthest_Backgrounds
     uniqueID: 2548287083
     locked: 0
@@ -48,6 +51,9 @@ TagManager:
     locked: 0
   - name: Players
     uniqueID: 2714702697
+    locked: 0
+  - name: HUD
+    uniqueID: 4000219151
     locked: 0
   - name: Default
     uniqueID: 0
