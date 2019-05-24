@@ -20,13 +20,14 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     private Vector3 respawnPoint;
     public SpriteRenderer rend;
-
+    public GameObject deathEffect;
     //health related things
     public Health playerHealth;
     private int maxHealth;
     private int curHealth = 3;
     public bool isKnockBack = false;
-
+    public bool isWhite = false;
+    private int isWhiteFlipper = 0;
 
     private void Start()
     {
@@ -65,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
         //health stuff
         playerHealth.curHealth = this.curHealth;
+        
+        
     }
 
     void FlipCharacter()
@@ -118,9 +121,28 @@ public class PlayerMovement : MonoBehaviour
             }
         } else
         {
-            knockBack(10);
-        }
+            if (isWhiteFlipper < 4)
+            {
+                rend.material.color = new Color(255, 255, 255);
+                //isWhite = !isWhite;
+                isWhiteFlipper++;
+            } else
+            {
 
+                rend.material.color = Color.white;
+                //isWhite = !isWhite;
+                isWhiteFlipper++;
+                if (isWhiteFlipper > 4)
+                {
+                    isWhiteFlipper = 0;
+                }
+            }
+            knockBack(5);
+        }
+        if (this.curHealth <= 0)
+        {
+            death();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -131,9 +153,8 @@ public class PlayerMovement : MonoBehaviour
         {
             curHealth--;
             isKnockBack = true;
-            rend.material.color = new Color(255, 0, 0);
+            
             StartCoroutine(knockBackTime());
-            StartCoroutine(redTime());
         }
     }
 
@@ -148,20 +169,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator redTime()
-    {
-        yield return new WaitForSeconds(.05f);
-        rend.material.color = Color.white;
-    }
+
     IEnumerator knockBackTime()
     {
-        yield return new WaitForSeconds(.175f);
-        
+        yield return new WaitForSeconds(.25f);
+        rend.material.color = Color.white;
         isKnockBack = false;
+        isWhiteFlipper = 0;
     }
 
     void death()
     {
+        Vector3 explosionPoint = transform.position;
+        explosionPoint.y += 2.5f;
+        Instantiate(deathEffect, explosionPoint, transform.rotation);
         Destroy(gameObject);
     }
 }
