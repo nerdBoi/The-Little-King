@@ -13,6 +13,9 @@ public class WizardController : Enemy
     private SpriteRenderer renderer;
     private Rigidbody2D rb2d;
     public GameObject Projectile;
+    private float scalarPower = 2f;
+    public int stage = 0;
+    public Animator animator;
     GameObject go;
     PlayerMovement cs;
     // Start is called before the first frame update
@@ -49,6 +52,7 @@ public class WizardController : Enemy
     {
        rb2d.AddForce(transform.right * Random.Range(-20f, 20f));
        rb2d.AddForce(transform.up * Random.Range(-20f, 20f));
+        
     }
 
     public override void TakeDamage(int damage)
@@ -56,10 +60,25 @@ public class WizardController : Enemy
         health = health - damage;
         renderer.material.color = new Color(255, 0, 0);
         StartCoroutine(TakeDamageFlash());
-
+       
         if (health <= 0)
         {
             death();
+        }
+        else if (health < 3)
+        {
+            scalarPower = .8f;
+            animator.SetInteger("Stage", 3);
+        }
+        else if (health < 5)
+        {
+            scalarPower = 1;
+        }
+        else if (health < 7)
+        {
+            scalarPower = 1.2f;
+            Debug.Log("STAGE 2");
+            animator.SetInteger("Stage", 2);
         }
     }
 
@@ -79,7 +98,7 @@ public class WizardController : Enemy
 
     private IEnumerator TimeToPort()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(1.7f * scalarPower);
         Teleport();
         StartCoroutine(TimeToPort());
 
@@ -87,6 +106,7 @@ public class WizardController : Enemy
 
     private void Teleport()
     {
+        rb2d.velocity = new Vector3(0, 0, 0);
         float xPlus = Random.Range(-1f, 1f);
         float yPlus = Random.Range(-1f, 1f);
         Vector3 teleSpot = playerPosition;
@@ -120,7 +140,7 @@ public class WizardController : Enemy
 
     private IEnumerator TimeToShootFire()
     {
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(.9f * scalarPower);
         ShootFire();
         StartCoroutine(TimeToShootFire());
 

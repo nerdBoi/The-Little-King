@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3835371040999510932}
   - component: {fileID: 3835371040999510931}
   - component: {fileID: 3835371040999510930}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MageBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -124,6 +124,8 @@ MonoBehaviour:
     type: 3}
   Projectile: {fileID: 5928546619914433563, guid: 70ac72bd126db0d4fbcd2b3718f67aa8,
     type: 3}
+  stage: 0
+  animator: {fileID: 3835371040999510933}
 --- !u!61 &3835371040999510931
 BoxCollider2D:
   m_ObjectHideFlags: 0

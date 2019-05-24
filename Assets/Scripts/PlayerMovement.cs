@@ -28,11 +28,15 @@ public class PlayerMovement : MonoBehaviour
     public bool isKnockBack = false;
     public bool isWhite = false;
     private int isWhiteFlipper = 0;
+    private bool canTakeDamage = true;
 
     private void Start()
     {
+      
+
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        
     }
 
     public void setRespawnPoint(Vector3 position)
@@ -149,11 +153,12 @@ public class PlayerMovement : MonoBehaviour
     {
        
         //if the thing is an enemy
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && canTakeDamage)
         {
+
             curHealth--;
             isKnockBack = true;
-            
+            StartCoroutine(InvulTime());
             StartCoroutine(knockBackTime());
         }
     }
@@ -169,6 +174,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    IEnumerator InvulTime()
+    {
+        canTakeDamage = false;
+        rend.material.color = new Color(1f, 1f, 1f, .25f);
+        yield return new WaitForSeconds(1f);
+        canTakeDamage = true;
+    }
 
     IEnumerator knockBackTime()
     {
