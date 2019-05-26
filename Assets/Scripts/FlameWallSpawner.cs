@@ -35,7 +35,9 @@ public class FlameWallSpawner : MonoBehaviour
             Vector3 flameSpointRight = transform.position;
             flameSpointRight.x = transform.position.x + rightBound;
 
-            Instantiate(bossMonster, flameSpointLeft, transform.rotation);
+            Vector3 badGuySpot = transform.position;
+            badGuySpot.y = badGuySpot.y + 10;
+            Instantiate(bossMonster, badGuySpot, transform.rotation);
 
             Instantiate(wallMaterial, flameSpointLeft, transform.rotation);
             Instantiate(wallMaterial, flameSpointRight, transform.rotation);

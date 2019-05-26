@@ -69,6 +69,10 @@ public class SwordSlash : MonoBehaviour
         {
             
         }
+        if (hitInfo.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("OOF");
+        }
         Destroy(gameObject);
     }
 }
