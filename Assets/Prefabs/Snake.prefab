@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3442231831200736296}
   m_Layer: 0
   m_Name: Snake
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   health: 3
   deathEffect: {fileID: 8544897045778530006, guid: 94172296bf62e974fb83f50433830499,
     type: 3}
+  renderer: {fileID: 0}
 --- !u!61 &3442231831200736295
 BoxCollider2D:
   m_ObjectHideFlags: 0

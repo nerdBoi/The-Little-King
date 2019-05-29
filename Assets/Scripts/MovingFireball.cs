@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +13,22 @@ public class MovingFireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject go = GameObject.Find("Player");
-        PlayerMovement cs = go.GetComponent<PlayerMovement>();
-        Vector3 spot = cs.transform.position;
-        //
-        rb2d = GetComponent<Rigidbody2D>();
-        StartCoroutine(FireballLiFe());
-        direction = spot - transform.position;
-        rb2d.AddForce(direction * speed);
-        //
-        Physics.IgnoreLayerCollision(0, 0);
-        Physics.IgnoreLayerCollision(0, 8);
+        try
+        {
+            GameObject go = GameObject.Find("Player");
+            PlayerMovement cs = go.GetComponent<PlayerMovement>();
+            Vector3 spot = cs.transform.position;
+            //
+            rb2d = GetComponent<Rigidbody2D>();
+            StartCoroutine(FireballLiFe());
+            direction = spot - transform.position;
+            rb2d.AddForce(direction * speed);
+            //
+        } catch
+        {
+            //player is dead
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +40,6 @@ public class MovingFireball : MonoBehaviour
 
     private IEnumerator FireballLiFe()
     {
-        //  Debug.Log("FART");
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
 

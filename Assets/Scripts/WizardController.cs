@@ -16,16 +16,17 @@ public class WizardController : Enemy
     private float scalarPower = 2f;
     public int stage = 0;
     public Animator animator;
-    GameObject go;
-    PlayerMovement cs;
+
+    private GameObject player;
+    private PlayerMovement pmove;
     // Start is called before the first frame update
     void Start()
     {
-        go = GameObject.Find("Player");
-        cs = go.GetComponent<PlayerMovement>();
-        playerPosition = cs.transform.position;
+      
+        player = GameObject.Find("Player");
+        pmove = player.GetComponent<PlayerMovement>();
+        playerPosition = pmove.transform.position;
 
-        //
         renderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         StartCoroutine(TimeToPort());
@@ -35,17 +36,23 @@ public class WizardController : Enemy
     // Update is called once per frame
     void Update()
     {
-        playerPosition = cs.transform.position;
-        //keeps mage facing you
-        if ((playerPosition.x < transform.position.x) && isFacingRight)
+        try
         {
-            FlipWizard();
-        }
-        if ((playerPosition.x > transform.position.x) && !isFacingRight)
+            playerPosition = pmove.transform.position;
+            //keeps mage facing you
+            if ((playerPosition.x < transform.position.x) && isFacingRight)
+            {
+                FlipWizard();
+            }
+            if ((playerPosition.x > transform.position.x) && !isFacingRight)
+            {
+                FlipWizard();
+            }
+            //ends keeping wizard facing you
+        } catch
         {
-            FlipWizard();
+            //you're dead in this block
         }
-        //ends keeping wizard facing you
     }
 
     private void FixedUpdate()
@@ -77,7 +84,6 @@ public class WizardController : Enemy
         else if (health < 7)
         {
             scalarPower = 1.2f;
-            Debug.Log("STAGE 2");
             animator.SetInteger("Stage", 2);
         }
     }
